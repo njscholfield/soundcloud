@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"?>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SoundCloud Description</title>
+    <link rel="stylesheet" href="https://noahscholfield.com/css/bootstrap-yeti.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+    <script src="soundcloud.js"></script>
+  </head>
+  <body ng-app="soundcloud">
+    <div class="jumbotron">
+      <div class="container">
+        <h1>SoundCloud Description</h1>
+      </div>
+    </div>
+    <div class="container" ng-controller="descriptionController as descriptionCtrl">
+      <form ng-submit="descriptionCtrl.submit()">
+        <h3>Get Description</h3>
+        <fieldset>
+          <div class="form-group">
+            <label for="url">Track URL</label>
+            <input class="form-control" type="url" name="url" ng-model="descriptionCtrl.url">
+          </div>
+        </fieldset>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-default" type="reset">Clear</button>
+          </div>
+      </form>
+      <section ng-show="descriptionCtrl.trackJSON.description">
+        <h3>Description</h3>
+        <pre>{{descriptionCtrl.trackJSON.description}}</pre>
+        <button class="btn-link" ng-click="descriptionCtrl.toggleJSON()">All Track Info</button>
+          <pre ng-show="descriptionCtrl.showJSON">
+            <code>{{descriptionCtrl.trackJSON | json}}</code>
+          </pre>
+      </section>
+    </div>
+  </body>
+</html>
