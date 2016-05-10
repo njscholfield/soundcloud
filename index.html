@@ -7,6 +7,7 @@
     <title>SoundCloud Description</title>
     <link rel="stylesheet" href="https://noahscholfield.com/css/bootstrap-yeti.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.5/angular-sanitize.min.js"></script>
     <script src="soundcloud.js"></script>
   </head>
   <body ng-app="soundcloud">
@@ -30,9 +31,22 @@
           </div>
       </form>
       <section ng-show="descriptionCtrl.trackJSON">
-        <h3>Description</h3>
-        <pre>{{descriptionCtrl.trackJSON.description}}</pre>
-        <button class="btn-link" ng-click="descriptionCtrl.toggleJSON()">All Track Info</button>
+        <div>
+          <div>
+            <h3>{{descriptionCtrl.trackJSON.title}}</h3>
+            <h4>by
+              <a target="_blank" href="{{descriptionCtrl.trackJSON.user.permalink_url}}">{{descriptionCtrl.trackJSON.user.username}}</a>
+            </h4>
+            <h6>
+              <a target="_blank" href="{{descriptionCtrl.trackJSON.purchase_url}}">{{descriptionCtrl.trackJSON.purchase_title}}</a>
+            </h6>
+          </div>
+            <hr>
+          <p ng-repeat="paragraph in descriptionCtrl.html track by $index" ng-bind-html="paragraph"></p>
+        </div>
+          <br>
+        <button class="btn btn-primary" ng-click="descriptionCtrl.toggleJSON()">View All Track Info</button>
+          <br>
           <pre ng-show="descriptionCtrl.showJSON">
             <code>{{descriptionCtrl.trackJSON | json}}</code>
           </pre>
