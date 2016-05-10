@@ -12,6 +12,7 @@ app.controller("descriptionController", ["$http", function($http) {
       .then(function success(response) {
         sc.trackJSON = response.data
         sc.html = JSONtoHTML(sc.trackJSON.description)
+        sc.tags = sc.trackJSON.tag_list.split(' ')
       }, function error(response) {
         if(response.status === 403) {
           sc.trackJSON = {"error": "The information for this track is not available", "code": 403}

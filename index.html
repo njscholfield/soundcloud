@@ -20,7 +20,7 @@
       <form ng-submit="descriptionCtrl.submit()">
         <h3>Get Description</h3>
         <fieldset>
-          <div class="form-group" ng-class="{'has-error': descriptionCtrl.trackJSON.code === 404}">
+          <div class="form-group" ng-class="{'has-error': descriptionCtrl.trackJSON.code === 404, 'has-warning': descriptionCtrl.trackJSON.code === 403}">
             <label for="url">Track URL</label>
             <input class="form-control" type="url" name="url" ng-model="descriptionCtrl.url">
           </div>
@@ -44,6 +44,8 @@
             <h6>
               <a target="_blank" href="{{descriptionCtrl.trackJSON.purchase_url}}">{{descriptionCtrl.trackJSON.purchase_title}}</a>
             </h6>
+            <span ng-show="descriptionCtrl.tags">Tags:<span>
+            <span ng-repeat="tag in descriptionCtrl.tags track by $index"><span class="label label-primary">{{tag}}</span> </span>
           </div>
             <hr>
           <p ng-repeat="paragraph in descriptionCtrl.html track by $index" ng-bind-html="paragraph"></p>
