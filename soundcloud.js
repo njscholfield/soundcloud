@@ -12,7 +12,7 @@ app.controller("descriptionController", ["$http", function($http) {
       .then(function success(response) {
         sc.trackJSON = response.data
         sc.html = JSONtoHTML(sc.trackJSON.description)
-        sc.tags = sc.trackJSON.tag_list.split(' ')
+        sc.tags = processTags(sc.trackJSON.tag_list)
       }, function error(response) {
         if(response.status === 403) {
           sc.trackJSON = {"error": "The information for this track is not available", "code": 403}
@@ -30,25 +30,42 @@ app.controller("descriptionController", ["$http", function($http) {
 }])
 
 var JSONtoHTML = function(string) {
-  this.HTML = string.split('\n')
-  this.HTML.forEach(function(item, index, array) {
+  var HTML = string.split('\n')
+  HTML.forEach(function(item, index, array) {
     if(item == '') {
       array[index] = '<br>'
     } else if(item.indexOf('http') !== -1) {
       array[index] = addATags(item)
     }
   })
-  return this.HTML
+  return HTML
 }
 
 var addATags = function(string) {
-  this.linkStart = string.indexOf('http')
-  this.beforeLink = string.substring(0, this.linkStart)
-  this.link = string.substring(this.linkStart)
-  this.rest = ''
-  if(this.link.indexOf(' ') !== -1) {
-    this.rest = this.link.substring(this.link.indexOf(' '))
-    this.link = this.link.substring(0, this.link.indexOf(' '))
+  var linkStart = string.indexOf('http')
+  var beforeLink = string.substring(0, linkStart)
+  var link = string.substring(linkStart)
+  var rest = ''
+  if(link.indexOf(' ') !== -1) {
+    rest = link.substring(link.indexOf(' '))
+    link = link.substring(0, link.indexOf(' '))
   }
-  return this.beforeLink + '<a target="_blank" href=\"' + this.link + '\">' + this.link + '</a>' + this.rest
+  return beforeLink + '<a target="_blank" href=\"' + link + '\">' + link + '</a>' + rest
+}
+
+var processTags = function(string) {
+  var tags = string.split(' ')
+  var result = []
+  for(var i = 0; i < tags.length; i++) {
+    var text = tags[i]
+    if(text.indexOf('\"') !== -1) {
+      do {
+        text = text + ' ' + tags[i + 1]
+        i++
+      } while(tags[i].indexOf('\"') === -1)
+      text = text.slice(1, -1)
+    }
+    result.push(text)
+  }
+  return result
 }
