@@ -44,7 +44,7 @@
             <h6>
               <a target="_blank" href="{{descriptionCtrl.trackJSON.purchase_url}}">{{descriptionCtrl.trackJSON.purchase_title}}</a>
             </h6>
-            <span ng-show="descriptionCtrl.tags">Tags:<span>
+            <span ng-hide="descriptionCtrl.tags[0] === ''">Tags:<span>
             <span ng-repeat="tag in descriptionCtrl.tags track by $index"><span class="label label-primary">{{tag}}</span> </span>
           </div>
             <hr>
