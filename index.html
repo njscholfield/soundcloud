@@ -36,16 +36,21 @@
           <code>Error {{descriptionCtrl.trackJSON.code}}</code>
         </div>
         <div ng-hide="descriptionCtrl.trackJSON.error">
-          <div>
-            <h3>{{descriptionCtrl.trackJSON.title}}</h3>
-            <h4>by
-              <a target="_blank" href="{{descriptionCtrl.trackJSON.user.permalink_url}}">{{descriptionCtrl.trackJSON.user.username}}</a>
-            </h4>
-            <h6>
-              <a target="_blank" href="{{descriptionCtrl.trackJSON.purchase_url}}">{{descriptionCtrl.trackJSON.purchase_title}}</a>
-            </h6>
-            <span ng-hide="descriptionCtrl.tags[0] === ''">Tags:<span>
-            <span ng-repeat="tag in descriptionCtrl.tags track by $index"><span class="label label-primary">{{tag}}</span> </span>
+          <div class="row">
+            <div class="col-sm-10 col-sm-push-2">
+              <h3>{{descriptionCtrl.trackJSON.title}}</h3>
+              <h4>by
+                <a target="_blank" href="{{descriptionCtrl.trackJSON.user.permalink_url}}">{{descriptionCtrl.trackJSON.user.username}}</a>
+              </h4>
+              <h6>
+                <a target="_blank" href="{{descriptionCtrl.trackJSON.purchase_url}}">{{descriptionCtrl.trackJSON.purchase_title}}</a>
+              </h6>
+              <span ng-hide="descriptionCtrl.tags[0] === ''">Tags:<span>
+              <span ng-repeat="tag in descriptionCtrl.tags track by $index"><span class="label label-primary">{{tag}}</span> </span>
+            </div>
+            <div class="col-sm-2 col-sm-pull-10">
+              <img class="img-responsive" ng-src="{{descriptionCtrl.imgURL}}">
+            </div>
           </div>
             <hr>
           <p ng-repeat="paragraph in descriptionCtrl.html track by $index" ng-bind-html="paragraph"></p>

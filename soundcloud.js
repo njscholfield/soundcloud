@@ -13,6 +13,7 @@ app.controller("descriptionController", ["$http", function($http) {
         sc.trackJSON = response.data
         sc.html = JSONtoHTML(sc.trackJSON.description)
         sc.tags = processTags(sc.trackJSON.tag_list)
+        sc.imgURL = sc.trackJSON.artwork_url.replace('large', 't500x500')
       }, function error(response) {
         if(response.status === 403) {
           sc.trackJSON = {"error": "The information for this track is not available", "code": 403}
