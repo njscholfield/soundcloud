@@ -56,9 +56,7 @@
           <p ng-repeat="paragraph in descriptionCtrl.html track by $index" ng-bind-html="paragraph"></p>
           <br>
         <button class="btn btn-primary" ng-click="descriptionCtrl.toggleJSON()">View All Track Info</button>
-          <pre ng-show="descriptionCtrl.showJSON">
-            <code>{{descriptionCtrl.trackJSON | json}}</code>
-          </pre>
+          <pre ng-show="descriptionCtrl.showJSON"><code>{{descriptionCtrl.trackJSON | json}}</code></pre>
         </div>
       </section>
     </div>
