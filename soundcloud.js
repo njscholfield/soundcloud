@@ -21,7 +21,7 @@ app.controller("descriptionController", ["$http", function($http) {
             .then(function success(response) {
               processJSON(response)
             }, function error(response) {
-              sc.trackJSON = {"error": "Something went wrong... This could have been caused by an incorrect URL or a track for which the information is not available. Please try again.", "code": response.status}
+              sc.trackJSON = {"error": "Something went wrong... This could have been caused by a track for which the information is not available. Please try again.", "code": "'JSONP Response Code' + response.status"}
             })
         }
         console.log(response.status + ' ' + response.statusText)
