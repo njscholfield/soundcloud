@@ -10,21 +10,28 @@ app.controller("descriptionController", ["$http", function($http) {
     var callURL = scapi + sc.url + client
     $http.get(callURL)
       .then(function success(response) {
-        sc.trackJSON = response.data
-        sc.html = JSONtoHTML(sc.trackJSON.description)
-        sc.tags = processTags(sc.trackJSON.tag_list)
-        sc.imgURL = sc.trackJSON.artwork_url.replace('large', 't500x500')
+        successFunc(response)
       }, function error(response) {
         if(response.status === 403) {
           sc.trackJSON = {"error": "The information for this track is not available", "code": 403}
         } else if(response.status === 404) {
           sc.trackJSON = {"error": "Invalid URL, please try again", "code": 404}
         } else {
-          sc.trackJSON = {"error": "Something went wrong...", "code": response.status}
+          $http.jsonp(callURL + '&callback=JSON_CALLBACK')
+            .then(function success(response) {
+              successFunc(response)
+            }, function error(response) {
+              sc.trackJSON = {"error": "Something went wrong...", "code": response.status}
+            })
         }
-        console.log(response.status + ' ' + response.statusText + ' ' + response.data)
-        console.log(response.config)
+        console.log(response.status + ' ' + response.statusText)
       })
+      function successFunc(response) {
+        sc.trackJSON = response.data
+        sc.html = JSONtoHTML(sc.trackJSON.description)
+        sc.tags = processTags(sc.trackJSON.tag_list)
+        sc.imgURL = sc.trackJSON.artwork_url.replace('large', 't500x500')
+      }
   }
   sc.toggleJSON = function() {
     sc.showJSON = !sc.showJSON
