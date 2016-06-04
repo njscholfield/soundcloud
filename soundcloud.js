@@ -1,5 +1,5 @@
 var app = angular.module("soundcloud", ['ngSanitize'])
-var scapi = "https://crossorigin.me/https://api.soundcloud.com/resolve.json?url="
+var scapi = "https://api.soundcloud.com/resolve.json?url="
 var client = "&client_id=30cba84d4693746b0a2fbc0649b2e42c"
 
 app.controller("descriptionController", ["$http", function($http) {
