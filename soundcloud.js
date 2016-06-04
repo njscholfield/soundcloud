@@ -22,7 +22,7 @@ app.controller("descriptionController", ["$http", function($http) {
         } else {
           sc.trackJSON = {"error": "Something went wrong...", "code": response.status}
         }
-        console.log(response.status + ' ' + response.statusText)
+        console.log(response.status + ' ' + response.statusText + ' ' + response.data + ' ' + response.config)
       })
   }
   sc.toggleJSON = function() {
