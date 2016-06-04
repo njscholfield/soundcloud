@@ -21,6 +21,7 @@ app.controller("descriptionController", ["$http", function($http) {
             .then(function success(response) {
               processJSON(response)
             }, function error(response) {
+              console.log('JSONP HTTP code ' + response.status)
               if(response.status === 403) {
                 sc.trackJSON = {"error": "The information for this track is not available", "code": 403}
               } else if(response.status === 404) {
