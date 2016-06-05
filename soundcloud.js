@@ -35,6 +35,9 @@
           sc.imgURL = sc.trackJSON.artwork_url.replace('large', 't500x500')
         }
     }
+    if($location.url()) {
+      sc.submit()
+    }
     sc.toggleJSON = function() {
       sc.showJSON = !sc.showJSON
     }
