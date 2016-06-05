@@ -3,8 +3,9 @@
   var scapi = "https://api.soundcloud.com/resolve.json?url="
   var client = "&client_id=30cba84d4693746b0a2fbc0649b2e42c"
 
-  app.controller("descriptionController", ["$http", function($http) {
+  app.controller("descriptionController", ["$http", "$location", function($http, $location) {
     var sc = this
+    sc.url = $location.url().substring(1)
     sc.showJSON = false
     sc.html = []
     sc.submit = function() {
