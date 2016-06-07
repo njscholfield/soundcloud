@@ -12,7 +12,10 @@
       var callURL = scapi + sc.url + client
       $http.get(callURL)
         .then(function success(response) {
-          processJSON(response)
+          processJSON(response, setTimeout(function () {
+            var element = document.getElementById('trackTitle')
+            element.scrollIntoView(true)
+          }, 10))
         }, function error(response) {
           if(response.status === 403) {
             sc.trackJSON = {"error": "The information for this track is not available", "code": 403}
