@@ -12,10 +12,7 @@
       var callURL = scapi + sc.url + client
       $http.get(callURL)
         .then(function success(response) {
-          processJSON(response, setTimeout(function () {
-            var element = document.getElementById('trackTitle')
-            element.scrollIntoView(true)
-          }, 10))
+          processJSON(response)
         }, function error(response) {
           if(response.status === 403) {
             sc.trackJSON = {"error": "The information for this track is not available", "code": 403}
@@ -36,6 +33,10 @@
           sc.html = JSONtoHTML(sc.trackJSON.description)
           sc.tags = processTags(sc.trackJSON.tag_list)
           sc.imgURL = sc.trackJSON.artwork_url.replace('large', 't500x500')
+          setTimeout(function () {
+            var element = document.getElementById('trackTitle')
+            element.scrollIntoView(true)
+          }, 10)
         }
     }
     if($location.url()) {
