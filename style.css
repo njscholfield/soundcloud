@@ -1,0 +1,11 @@
+#trackTitle {
+  -webkit-scroll-snap-coordinate: 0 0;
+      -ms-scroll-snap-coordinate: 0 0;
+          scroll-snap-coordinate: 0 0;
+  -webkit-scroll-snap-type: mandatory;
+      -ms-scroll-snap-type: mandatory;
+          scroll-snap-type: mandatory;
+  -webkit-scroll-snap-destination: 0 0;
+      -ms-scroll-snap-destination: 0 0;
+          scroll-snap-destination: 0 0;
+}
