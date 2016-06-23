@@ -55,7 +55,7 @@
     HTML.forEach(function(item, index, array) {
       if(item == '') {
         array[index] = '<br>'
-      } else if(item.indexOf('http') !== -1) {
+      } else if(item.includes('http')) {
         array[index] = addATags(item)
       }
     })
@@ -67,7 +67,7 @@
     var beforeLink = string.substring(0, linkStart)
     var link = string.substring(linkStart)
     var rest = ''
-    if(link.indexOf(' ') !== -1) {
+    if(link.includes(' ')) {
       rest = link.substring(link.indexOf(' '))
       link = link.substring(0, link.indexOf(' '))
     }
@@ -79,11 +79,11 @@
     var result = []
     for(var i = 0; i < tags.length; i++) {
       var text = tags[i]
-      if(text.indexOf('\"') !== -1) {
+      if(text.includes('\"')) {
         do {
           text = text + ' ' + tags[i + 1]
           i++
-        } while(tags[i].indexOf('\"') === -1)
+        } while(!tags[i].includes('\"'))
         text = text.slice(1, -1)
       }
       result.push(text)
