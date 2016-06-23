@@ -33,6 +33,9 @@
           sc.html = JSONtoHTML(sc.trackJSON.description)
           sc.tags = processTags(sc.trackJSON.tag_list)
           sc.imgURL = sc.trackJSON.artwork_url.replace('large', 't500x500')
+          if(sc.trackJSON.purchase_url && !sc.trackJSON.purchase_title) {
+            sc.trackJSON.purchase_title = 'Buy'
+          }
           setTimeout(function () {
             var element = document.getElementById('trackTitle')
             element.scrollIntoView(true)
