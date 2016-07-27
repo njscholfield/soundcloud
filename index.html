@@ -48,6 +48,7 @@
               <span ng-hide="descriptionCtrl.tags[0] === ''">Tags:<span>
               <span ng-repeat="tag in descriptionCtrl.tags track by $index"><span class="label label-primary">{{tag}}</span> </span>
             </div>
+            <br>
             <div class="col-sm-2 col-sm-pull-10">
               <a href="{{descriptionCtrl.imgURL}}" target="_blank">
                 <img class="img-responsive center-block" ng-src="{{descriptionCtrl.imgURL}}">
